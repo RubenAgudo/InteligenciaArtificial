@@ -1,3 +1,4 @@
+#_*_coding: utf-8_*_
 from simpleai.search import breadth_first, depth_first, SearchProblem
 from simpleai.search.viewers import ConsoleViewer
 
@@ -12,29 +13,28 @@ class ProblemaDeLasReinasNRi(SearchProblem):
         self._dimension = pDimension
 
         #Acciones del problema
-        self._actions=[nR1, nR2, nR3, nR4]
+        self._actions = [nR1, nR2, nR3, nR4]
         
         #Representación del tablero
-        '''ESTADO INICIAL'''
+        #ESTADO INICIAL
         self.initial_state = []
-        '''RESTRICCIONES:
-        - El tablero no puede tener más filas
-        que dimensión
-        - Ninguna columna puede ser mayor
-        que dimensión'''
+        #RESTRICCIONES:
+        #- El tablero no puede tener más filas que dimensión
+        #- Ninguna columna puede ser mayor que dimensión'''
 
     def columnasValidas(self, t):
-        bien=True
-        if len(t)>0: 
+        '''comprueba si la columna es valida'''
+        bien = True
+        if len(t) > 0: 
             for i in range(0, len(t)):
-                bien=bien and \
-                t[i]<=self._dimension
-                return bien
+                bien = bien and \
+                t[i] <= self._dimension
+        return bien
     
     
     def _is_valid(self, state):
         '''El tablero NO tiene mas filas que dimensión Las columnas son menores que dimensión'''
-        return(len(state)<=self._dimension and columnasValidas(self, state.estado))
+        return(len(state)<=self._dimension and self.columnasValidas(state.estado) == True)
 
     def  colocarUnaReina (self, state, action):
         def nR1( self , state): #Colocar una reina en la primera columna
@@ -58,4 +58,5 @@ class ProblemaDeLasReinasNRi(SearchProblem):
 problem = ProblemaDeLasReinasNRi(4)
 my_viewer = ConsoleViewer()
 result = breadth_first(problem, viewer=my_viewer)
+
 print result.path()
