@@ -1,6 +1,8 @@
 # coding=utf-8
 from simpleai.search import SearchProblem
 import copy
+#from simpleai.search.viewers import ConsoleViewer
+#from simpleai.search.traditional import breadth_first, depth_first
 
 class ProblemaDeLasReinasNRi(SearchProblem):
     '''Problema de las n reinas NRi'''
@@ -40,29 +42,32 @@ class ProblemaDeLasReinasNRi(SearchProblem):
         
     #    for x in range(self._dimension):
     #        #Para cada columna inicializamos con una reina
-    #        colocar.update({x: self.nRi(state, x)}) 
+    #        colocar.update({x: self.__nRi(state, x)}) 
             
     #    return colocar(action)
 
-    def nRi(self, state, columna): 
+    def __nRi(self, state, columna): 
         #Colocar una reina en la n-esima columna
         state.append(columna)
+        return state
 
     def actions(self, state):
         '''Dado un estado, devuelve a que estados puede ir'''
         columna = 0
-        lista = list()
-        while columna < self._dimension:
-            estado = copy.deepcopy(state)
-            self.nRi(estado, columna)
-            lista.append(estado)
-            columna += 1
+        lista = []
+        if(len(state) < self._dimension):
+            
+            while columna < self._dimension:
+                estado = copy.deepcopy(state)
+                self.__nRi(estado, columna)
+                lista.append(estado)
+                columna += 1
         return lista
     
     def result(self, state, action):
         '''Dado un estado y una accion devuelve el resultado de 
         aplicar esa accion a ese resultado.'''
-        return self.nRi(state, action)
+        return self.__nRi(state, action)
 
     def is_goal(self, state):
         
@@ -83,15 +88,48 @@ class ProblemaDeLasReinasNRi(SearchProblem):
                 #Si hay reinas en la misma diagonal, o estan en 
                 #la misma columna, salimos y devolvemos que no es 
                 #el nodo destino
-                resultado = self.reinasEnMismaDiagonal(reina1, reina2) or \
+                resultado = self.__reinasEnMismaDiagonal(reina1, reina2) or \
                     reina1[1] == reina2[1] 
               
                 y += 1
             x += 1
         return not resultado and set(state) != set(self.initial_state)
 
-    def reinasEnMismaDiagonal(self, pReina1, pReina2):
+    def __reinasEnMismaDiagonal(self, pReina1, pReina2):
         '''Devuelve True si las dos reinas estan en la misma columna
         y False si estan en distintas columnas'''
         return (pReina1[0] - pReina1[1] == pReina2[0] - pReina2[1]) or \
             (pReina1[0] + pReina1[1] == pReina2[0] + pReina2[1])
+
+problem = ProblemaDeLasReinasNRi(4)
+
+var = problem.result([], 2)
+print "El resultaod deberia ser 2 y es" + var.__str__()
+
+var = problem.actions([])
+print "El resultado deberia ser [0],[1],[2],[3] y es" + var.__str__()
+
+var = problem.actions([1])
+print "El resultado deberia ser [1,0],[1,1],[1,2],[1,3] y es" + var.__str__()
+
+var = problem.actions([1,2,3,4])
+print "El resultado deberia ser [] y es" + var.__str__()
+
+var = problem.is_goal([])
+print "el resultado deberia ser False y es: " + var.__str__()
+
+var = problem.is_goal([0,1,2,3])
+print "el resultado deberia ser False y es: " + var.__str__()
+
+var = problem.is_goal([2,0,3,1])
+print "el resultado deberia ser True y es: " + var.__str__()
+
+var = problem.is_goal([1,3,0,2])
+print "el resultado deberia ser True y es: " + var.__str__()
+# my_viewer = ConsoleViewer()
+# result = breadth_first(problem, viewer=my_viewer)
+# print result.path()
+# 
+# problem = ProblemaDeLasReinasNRi(4)
+# result = depth_first(problem, viewer = my_viewer)
+# print result.path()
