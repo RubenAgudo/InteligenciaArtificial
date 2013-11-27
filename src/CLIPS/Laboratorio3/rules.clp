@@ -38,9 +38,9 @@
         => (assert (gusta-jugar-pala ?x))
 )
 (defrule R9
-    ?equipo1<- (equipo-pala ?x ?y)
-    ?equipo2<-(equipo-pala ?w ?z)
+    (equipo-pala ?x ?y)
+    (equipo-pala ?w ?z)
     ?pista<-(pista-libre-Anoeta ?m)
     (test(neq ?equipo1 ?equipo2))
-        => (assert (partido ?equipo1 ?equipo2 ?pista)) (retract ?pista)
+        => (assert (partido (equipo1 ?x ?y)(equipo2 ?w ?z) (pista ?m)) (retract ?pista)
 )
