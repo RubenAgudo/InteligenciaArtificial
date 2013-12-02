@@ -13,3 +13,14 @@
     (buen-saque jon)
     (gusta-cualquier-deporte jon)
 )
+
+(deftemplate partido
+   (multislot equipo1)
+   (multislot equipo2)
+   (slot pista)
+)
+
+(deftemplate equipo
+    (slot jug1)
+    (slot jug2)
+)

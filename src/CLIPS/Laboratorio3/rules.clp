@@ -19,8 +19,14 @@
 )
 
 (defrule R5 
-    (equipo-campeonato ?x ?y) (gusta-jugar-pala ?x) (gusta-jugar-pala ?y)
-        => (assert (equipo-pala ?x ?y))
+    (equipo-campeonato ?x ?y) 
+    (gusta-jugar-pala ?x) 
+    (gusta-jugar-pala ?y)
+    (not (en-equipo ?x))
+    (not (en-equipo ?y))
+        => (assert (equipo-pala ?x ?y)) 
+            (assert (en-equipo ?x)) 
+            (assert (en-equipo ?y))
 )
 
 (defrule R6 
@@ -38,9 +44,10 @@
         => (assert (gusta-jugar-pala ?x))
 )
 (defrule R9
-    (equipo-pala ?x ?y)
-    (equipo-pala ?w ?z)
+    ?equipo1<-(equipo-pala ?x ?y)
+    ?equipo2<-(equipo-pala ?w ?z)
     ?pista<-(pista-libre-Anoeta ?m)
     (test(neq ?equipo1 ?equipo2))
-        => (assert (partido (equipo1 ?x ?y)(equipo2 ?w ?z) (pista ?m)) (retract ?pista)
+        =>  (assert (partido (equipo1 ?x ?y) (equipo2 ?w ?z) (pista ?m))) 
+            (retract ?pista)
 )
