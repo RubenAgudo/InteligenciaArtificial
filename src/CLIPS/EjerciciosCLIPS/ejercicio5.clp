@@ -1,6 +1,11 @@
-(deffacts hechos-iniciales
-    (numsFactorial 0 1)
+(defrule iniciar
+    (initial-fact)
+     =>
+        (printout t "De que numero quieres hacer el factorial: ")
+        (bind ?numero (read))
+        (assert (numsFactorial ?numero 1))
 )
+
 (defrule factorial
     ?paBorrar<-(numsFactorial ?x ?y)
     (not (numsFactorial 0 ?y))
@@ -16,4 +21,3 @@
     (retract ?paBorrar)
     
 )
-

@@ -1,0 +1,210 @@
+\documentclass[12pt]{article}
+%\documentclass[A4, 12pt]{scrreprt}
+\usepackage[spanish]{babel}
+\usepackage{fontspec}
+\usepackage{listings}
+%\usepackage{classicthesis}
+%\usepackage{arsclassica}
+\usepackage[hidelinks]{hyperref}
+
+\setmainfont{Helvetica Neue}
+
+%opening
+\title{Ejercicios CLIPS}
+\author{Rub\'{e}n Agudo\\
+        Jonatan Gale\'{a}n \\
+        I\~{n}igo Ochoa de Erive}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Resoluci\'{o}n de los ejercicios propuestos de CLIPS
+\end{abstract}
+
+\section{Ejercicio 1}
+Mirar soluci\'{o}n en el archivo adjunto.
+\section{Ejercicio 2}
+El orden de ejecuci\'{o}n de las reglas es el siguiente siguiendo la
+estrategia en profundidad.
+\begin{lstlisting}[breaklines=true, 
+numbers=left, showspaces=false]
+CLIPS> (run)
+FIRE    1 regla-1: f-1
+==> f-2     (elemento 2)
+==> Activation 10     regla-1: f-2
+FIRE    2 regla-1: f-2
+==> f-3     (elemento 3)
+==> Activation 10     regla-1: f-3
+FIRE    3 regla-1: f-3
+==> f-4     (elemento 4)
+==> Activation 10     regla-1: f-4
+FIRE    4 regla-1: f-4
+==> f-5     (elemento 5)
+==> Activation 10     regla-1: f-5
+FIRE    5 regla-1: f-5
+==> f-6     (elemento 6)
+==> Activation 10     regla-1: f-6
+FIRE    6 regla-1: f-6
+==> f-7     (elemento 7)
+==> Activation 10     regla-1: f-7
+FIRE    7 regla-1: f-7
+==> f-8     (elemento 8)
+==> Activation 10     regla-1: f-8
+FIRE    8 regla-1: f-8
+==> f-9     (elemento 9)
+==> Activation 10     regla-1: f-9
+FIRE    9 regla-1: f-9
+==> f-10    (elemento 10)
+==> Activation 10     regla-1: f-10
+FIRE   10 regla-1: f-10
+==> f-11    (elemento 11)
+==> Activation 10     regla-1: f-11
+FIRE   11 regla-1: f-11
+==> f-12    (elemento 12)
+==> Activation 10     regla-1: f-12
+FIRE   12 regla-1: f-12
+==> f-13    (elemento 13)
+==> Activation 10     regla-1: f-13
+FIRE   13 regla-1: f-13
+==> f-14    (elemento 14)
+==> Activation 10     regla-1: f-14
+FIRE   14 regla-1: f-14
+==> f-15    (elemento 15)
+==> Activation 10     regla-1: f-15
+FIRE   15 regla-1: f-15
+==> f-16    (elemento 16)
+==> Activation 20     regla-2: f-16
+==> Activation 10     regla-1: f-16
+FIRE   16 regla-2: f-16
+[PRCCODE4] Execution halted during the actions of defrule regla-2.
+)
+\end{lstlisting}
+
+\section{Ejercicio 3}
+El orden de ejecuci\'{o}n de las reglas es el siguiente siguiendo la
+estrategia en profundidad.
+\begin{lstlisting}[breaklines=true, 
+numbers=left, showspaces=false]
+CLIPS> (run)
+FIRE    1 regla-1: f-1,f-1
+==> f-2     (elemento 2)
+==> Activation 10     regla-1: f-1,f-2
+==> Activation 10     regla-1: f-2,f-1
+==> Activation 10     regla-1: f-2,f-2
+FIRE    2 regla-1: f-2,f-2
+==> f-3     (elemento 4)
+==> Activation 10     regla-1: f-2,f-3
+==> Activation 10     regla-1: f-1,f-3
+==> Activation 10     regla-1: f-3,f-1
+==> Activation 10     regla-1: f-3,f-2
+==> Activation 10     regla-1: f-3,f-3
+FIRE    3 regla-1: f-3,f-3
+==> f-4     (elemento 8)
+==> Activation 10     regla-1: f-3,f-4
+==> Activation 10     regla-1: f-2,f-4
+==> Activation 10     regla-1: f-1,f-4
+==> Activation 10     regla-1: f-4,f-1
+==> Activation 10     regla-1: f-4,f-2
+==> Activation 10     regla-1: f-4,f-3
+==> Activation 10     regla-1: f-4,f-4
+FIRE    4 regla-1: f-4,f-4
+==> f-5     (elemento 16)
+==> Activation 10     regla-1: f-4,f-5
+==> Activation 10     regla-1: f-3,f-5
+==> Activation 10     regla-1: f-2,f-5
+==> Activation 10     regla-1: f-1,f-5
+==> Activation 10     regla-1: f-5,f-1
+==> Activation 10     regla-1: f-5,f-2
+==> Activation 10     regla-1: f-5,f-3
+==> Activation 10     regla-1: f-5,f-4
+==> Activation 10     regla-1: f-5,f-5
+FIRE    5 regla-1: f-5,f-5
+==> f-6     (elemento 32)
+==> Activation 20     regla-2: f-6
+==> Activation 10     regla-1: f-5,f-6
+==> Activation 10     regla-1: f-4,f-6
+==> Activation 10     regla-1: f-3,f-6
+==> Activation 10     regla-1: f-2,f-6
+==> Activation 10     regla-1: f-1,f-6
+==> Activation 10     regla-1: f-6,f-1
+==> Activation 10     regla-1: f-6,f-2
+==> Activation 10     regla-1: f-6,f-3
+==> Activation 10     regla-1: f-6,f-4
+==> Activation 10     regla-1: f-6,f-5
+==> Activation 10     regla-1: f-6,f-6
+FIRE    6 regla-2: f-6
+[PRCCODE4] Execution halted during the actions of defrule regla-2.
+\end{lstlisting}
+
+\section{Ejercicio 4}
+El orden de ejecuci\'{o}n de las reglas es el siguiente siguiendo la
+estrategia en profundidad.
+\begin{lstlisting}[breaklines=true, 
+numbers=left, showspaces=false]
+CLIPS> (run)
+FIRE    1 regla1: f-3
+==> f-4     (valor 5)
+==> Activation 1      regla3: f-4
+FIRE    2 regla1: f-2
+==> f-5     (valor 8)
+==> Activation 5      regla2: f-4,f-5
+==> Activation 1      regla3: f-5
+FIRE    3 regla1: f-1
+==> f-6     (valor 1)
+==> Activation 1      regla3: f-6
+==> Activation 5      regla2: f-6,f-4
+==> Activation 5      regla2: f-6,f-5
+FIRE    4 regla2: f-6,f-5
+<== f-6     (valor 1)
+<== Activation 5      regla2: f-6,f-4
+<== Activation 1      regla3: f-6
+FIRE    5 regla2: f-4,f-5
+<== f-4     (valor 5)
+<== Activation 1      regla3: f-4
+FIRE    6 regla3: f-5
+Resultado: valor 8
+<== f-5     (valor 8)
+CLIPS>
+\end{lstlisting}
+
+\section{Ejercicio 5}
+Nuestra soluci\'{o}n para el ejercicio del factorial es el siguiente, pero
+no hemos utilizado la instrucci\'{o}n \texttt{salience} ya que no lo hemos
+considerado oportuno. 
+
+Para evitar los conflictos entre reglas, lo que hacemos
+es a\~{n}adir una y borrar la anterior. En cada ejecuci\'{o}n de la regla
+\texttt{factorial} restamos uno al n\'{u}mero introducido por el usuario, y 
+acumulamos, multiplicando lo que hab\'{i}a por el ciclo actual.
+
+El caso base, sirve tanto para parar, como para el caso del factorial de 0.
+\begin{lstlisting}[breaklines=true, 
+numbers=left, showspaces=false]
+(defrule iniciar
+    (initial-fact)
+    =>
+        (printout t "De que numero quieres hacer el factorial: ")
+        (bind ?numero (read))
+        (assert (numsFactorial ?numero 1))
+)
+
+(defrule factorial
+    ?paBorrar<-(numsFactorial ?x ?y)
+    (not (numsFactorial 0 ?y))
+    =>
+        (assert (numsFactorial (- ?x 1)(* ?y ?x)))
+        (retract ?paBorrar)
+)
+
+(defrule casoBase
+    ?paBorrar<-(numsFactorial 0 ?y)
+    =>
+        (printout t "Resultado: valor " ?y crlf)
+        (retract ?paBorrar)
+
+)
+\end{lstlisting}
+
+\end{document}
