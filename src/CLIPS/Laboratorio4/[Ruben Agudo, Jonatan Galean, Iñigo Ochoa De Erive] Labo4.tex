@@ -1,0 +1,141 @@
+\documentclass[hidelinks]{scrreprt}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{classicthesis}
+\usepackage{arsclassica}
+
+% Title Page
+\title{CLIPS Laboratorio 4}
+\author{Rub\'{e}n Agudo \\
+    Jonatan Galean \\
+    I\~{n}igo Ochoa de Erive}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+    Implementaci\'{o}n del laboratorio 4, con las reglas
+    necesarias para hacer funcionar la c\'{a}mara
+\end{abstract}
+
+\chapter{Creaci\'{o}n del carrete de 24}
+Para realizar este cambio, basta con cambiar en la \texttt{defclass CARRETE\_DE\_DOS}
+en el slot \texttt{N\_FOTOS} el range de 0 2 a 0 24.
+
+Es decir:
+\begin{lstlisting} [showspaces=false, numbers=left, breaklines=true]
+(defclass CARRETE_DE_24
+    (is-a CARRETE)
+    (role concrete)
+    (single-slot N_FOTOS
+        (type INTEGER)
+        (range 0 24)
+        (default 0)
+        (create-accessor read-write)
+    )
+)
+\end{lstlisting}
+
+\chapter{Implementaci\'{o}n de la c\'{a}mara}
+Para realizar la implementaci\'{o}n primero hemos pensado a ver cuales eran 
+las restricciones que se aplican a la hora de realizar una foto de manera anal\'{o}gica.
+
+Y pensamos que son las siguientes:
+\begin{itemize}
+    \item Que tenga un carrete puesto
+    \begin{itemize}
+        \item Que ese carrete no este terminado
+    \end{itemize}
+    \item Que la tapa este abierta
+    \item Que el seguro est\'{e} quitado
+    \item Que este cargada (en nuestra opini\'{o}n esto
+    es redundante, ya que si tiene un carrete puesto, y no est\'{a} terminado
+    obviamente est\'{a} cargada.)
+\end{itemize}
+
+\section{Reglas necesarias}
+Para realizar la siguiente funcionalidad implementamos las siguientes reglas.
+
+\begin{lstlisting} [showspaces=false, numbers=left, breaklines=true]
+(defrule sacarfoto
+    (eq ABIERTA (send [miCamara] get-TAPA_CIERRA))
+    (eq SI (send [miCamara] get-CARGADA))
+    (eq QUITADO (send [miCamara] get-SEGURO))
+    ?carrete <- (send [miCamara] get-PELICULA)
+    (test < (send [miCamara] get-N_FOTOS) (send ?carrete get-N_FOTOS))
+=>
+    (send [miCamara] putt-N_FOTOS (+ 1 send [miCamara] get-N_FOTOS))
+)
+\end{lstlisting}
+
+Pero entonces pensamos, \textquestiondown que sucede si la tapa esta cerrada, o el seguro quitado?
+
+Para solventar el problema creamos las dos siguientes reglas:
+\begin{lstlisting} [showspaces=false, numbers=left, breaklines=true]
+(defrule quitarSeguro
+    (eq PUESTO (send [miCamara] get-SEGURO))
+=>
+    (send [miCamara] putt-SEGURO QUITADO)
+)
+
+(defrule quitarTapa
+    (eq CERRADA (send [miCamara] get-TAPA_CIERRE))
+=>
+    (send [miCamara] putt-TAPA_CIERE ABIERTA)
+)
+\end{lstlisting}
+
+En este instante ya somos capaces de quitar el seguro y de abrir la tapa en caso de que estuviera cerrada.
+Ahora solo queda cambiar el carrete si lo hemos terminado, pero para ello antes es necesario rebobinar la
+c\'{a}mara, ya que si abrimos la c\'{a}mara sin rebobinarla, se nos van a velar las fotos, y no queremos eso,
+\textquestiondown verdad?
+
+
+\begin{lstlisting} [showspaces=false, numbers=left, breaklines=true]
+(defrule rebobinar
+    (eq NO (send [miCamara] get-REBOBINADA))
+    (eq (send [miCamara] get-N_FOTOS) (send ?carrete get-N_FOTOS))
+=>
+    (send [miCamara] putt-REBOBINADA SI)
+    (send [miCamara] putt-N_FOTOS 0)
+    (send [miCamara] putt-PELICULA (make-instance [nil] of CARRETE))
+    (send [miCamara] putt-CARGADA NO)
+)
+\end{lstlisting}
+
+Esta regla, b\'{a}sicamente lo que hace es, si no esta rebobinada, y el n\'{u}mero de fotos realizada con la
+c\'{a}mara, es igual al n\'{u}mero de fotos que se pueden hacer con ese carrete, la rebobinamos, reiniciamos el
+contador de fotos de la c\'{a}mara y ponemos una pel\'{i}cula nueva, en este caso utilizamos 
+\texttt{[nil]} para decir que es \texttt{null}. Y ponemos que no esta cargada.
+
+Por \'{u}ltimo, queda cargar un nuevo carrete.
+
+\begin{lstlisting} [showspaces=false, numbers=left, breaklines=true]
+(defrule cargarPelicula
+    (eq SI (send [miCamara] get-REBOBINADA))
+    ?nombreInstancia <- (INSTANCE-NAME-TO-SYMBOL (send [miCamara] get-PELICULA))
+    (eq ?nombreInstancia nil)
+    (eq NO (send [miCamara] get-CARGADA))
+=>
+    (send [miCamara] putt-PELICULA (make-instance [miCarrete] of CARRETE_DE_DOS))
+    (send [miCamara] putt-CARGADA SI)
+)
+\end{lstlisting}
+
+Lo que hace esta regla es: si tenemos la c\'{a}mara rebobinada, y la pel\'{i}cula que tiene
+la c\'{a}mara es \texttt{nil}, es decir, no tiene pel\'{i}cula, y no est\'{a} cargada, pues creamos
+una nueva instancia de carrete, y se la asignamos a la c\'{a}mara, y ponemos que est\'{a} cargada.
+
+Ya tenemos la c\'{a}mara lista para disparar.
+
+\appendix
+\chapter{Notas}
+Hemos programado todo sin haberlo podido probar, ya que and\'{a}bamos justos de tiempo. De todas formas, como
+se puede observar, todo lo que hemos hecho programado esta justificado, es decir, no ha sido programado al tunt\'{u}n.
+
+La idea principal es esa, este c\'{o}digo es muy mejorable, por ejemplo haciendo que pueda trabajar con mas de una 
+c\'{a}mara, eliminando el slot CARGADA y SACAR ya que creemos que son completamente irrelevantes.
+
+\end{document}
