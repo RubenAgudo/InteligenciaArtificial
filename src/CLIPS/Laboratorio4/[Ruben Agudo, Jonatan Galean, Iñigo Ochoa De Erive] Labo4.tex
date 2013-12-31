@@ -46,11 +46,11 @@ Y pensamos que son las siguientes:
 \begin{itemize}
     \item Que tenga un carrete puesto
     \begin{itemize}
-        \item Que ese carrete no este terminado
+        \item Que ese carrete no est\'{e} terminado
     \end{itemize}
-    \item Que la tapa este abierta
+    \item Que la tapa est\'{e} abierta
     \item Que el seguro est\'{e} quitado
-    \item Que este cargada (en nuestra opini\'{o}n esto
+    \item Que est\'{e} cargada (en nuestra opini\'{o}n esto
     es redundante, ya que si tiene un carrete puesto, y no est\'{a} terminado
     obviamente est\'{a} cargada.)
 \end{itemize}
@@ -70,7 +70,7 @@ Para realizar la siguiente funcionalidad implementamos las siguientes reglas.
 )
 \end{lstlisting}
 
-Pero entonces pensamos, \textquestiondown que sucede si la tapa esta cerrada, o el seguro quitado?
+Pero entonces pensamos, \textquestiondown que sucede si la tapa est\'{a} cerrada, o el seguro quitado?
 
 Para solventar el problema creamos las dos siguientes reglas:
 \begin{lstlisting} [showspaces=false, numbers=left, breaklines=true]
@@ -88,7 +88,7 @@ Para solventar el problema creamos las dos siguientes reglas:
 \end{lstlisting}
 
 En este instante ya somos capaces de quitar el seguro y de abrir la tapa en caso de que estuviera cerrada.
-Ahora solo queda cambiar el carrete si lo hemos terminado, pero para ello antes es necesario rebobinar la
+Ahora s\'{o}lo queda cambiar el carrete si lo hemos terminado, pero para ello antes es necesario rebobinar la
 c\'{a}mara, ya que si abrimos la c\'{a}mara sin rebobinarla, se nos van a velar las fotos, y no queremos eso,
 \textquestiondown verdad?
 
@@ -105,10 +105,10 @@ c\'{a}mara, ya que si abrimos la c\'{a}mara sin rebobinarla, se nos van a velar 
 )
 \end{lstlisting}
 
-Esta regla, b\'{a}sicamente lo que hace es, si no esta rebobinada, y el n\'{u}mero de fotos realizada con la
+Esta regla, b\'{a}sicamente lo que hace es, si no est\'{a} rebobinada, y el n\'{u}mero de fotos realizada con la
 c\'{a}mara, es igual al n\'{u}mero de fotos que se pueden hacer con ese carrete, la rebobinamos, reiniciamos el
 contador de fotos de la c\'{a}mara y ponemos una pel\'{i}cula nueva, en este caso utilizamos 
-\texttt{[nil]} para decir que es \texttt{null}. Y ponemos que no esta cargada.
+\texttt{[nil]} para decir que es \texttt{null}. Y ponemos que no est\'{a} cargada.
 
 Por \'{u}ltimo, queda cargar un nuevo carrete.
 
@@ -135,7 +135,7 @@ Ya tenemos la c\'{a}mara lista para disparar.
 Hemos programado todo sin haberlo podido probar, ya que and\'{a}bamos justos de tiempo. De todas formas, como
 se puede observar, todo lo que hemos hecho programado esta justificado, es decir, no ha sido programado al tunt\'{u}n.
 
-La idea principal es esa, este c\'{o}digo es muy mejorable, por ejemplo haciendo que pueda trabajar con mas de una 
+La idea principal es esa, este c\'{o}digo es muy mejorable, por ejemplo haciendo que pueda trabajar con m\'{a}s de una 
 c\'{a}mara, eliminando el slot CARGADA y SACAR ya que creemos que son completamente irrelevantes.
 
 \end{document}

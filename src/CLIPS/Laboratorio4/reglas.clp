@@ -39,4 +39,46 @@
 =>
     (send [miCamara] putt-TAPA_CIERE ABIERTA)
 )
-    
+
+(defclass CAMARA
+    (is-a USER)
+    (role concrete)
+    (single-slot REBOBINADA
+        (type SYMBOL)
+        (allowed-values SI NO)
+        (create-accessor read-write)
+    )
+    (single-slot NUEVA_FOTO
+        (type SYMBOL)
+        (allowed-values SACAR)
+        (create-accessor read-write)
+    )
+    (single-slot PELICULA
+        (type INSTANCE)
+        (allowed-classes CARRETE)
+        (create-accessor read-write)
+    )
+    (single-slot TAPA_CIERRE
+        (type SYMBOL)
+        (allowed-values ABIERTA CERRADA)
+        (default CERRADA)
+        (create-accessor read-write)
+    )
+    (single-slot CARGADA
+        (type SYMBOL)
+        (allowed-values SI NO)
+        (default NO)
+        (create-accessor read-write)
+    )
+    (single-slot SEGURO
+        (type SYMBOL)
+        (allowed-values PUESTO QUITADO)
+        (default PUESTO)
+        (create-accessor read-write))
+    (single-slot N_FOTOS
+        (type INTEGER)
+        (range 0 ?VARIABLE)
+        (default 0)
+        (create-accessor read-write)
+    )
+)
