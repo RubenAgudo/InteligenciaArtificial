@@ -18,10 +18,12 @@
 
     (slot horaInicio
         (type INTEGER)
+        (range 8 14)
     )
     
     (slot horaFin
         (type INTEGER)
+        (range 8 14)
     )
     
 )
