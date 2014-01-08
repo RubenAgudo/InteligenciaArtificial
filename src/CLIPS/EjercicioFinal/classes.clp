@@ -2,7 +2,11 @@
     (slot curso 
         (type INTEGER)
     )
-
+    
+    (slot nombre
+        (type SYMBOL)
+    )
+    
     (slot diaSemana
         (type SYMBOL)
         (allowed-values LUNES MARTES MIERCOLES JUEVES VIERNES)
@@ -19,6 +23,7 @@
     (slot horaFin
         (type INTEGER)
     )
+    
 )
 
 (deftemplate asignatura
