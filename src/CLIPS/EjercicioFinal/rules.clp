@@ -7,7 +7,7 @@
 		(profesor ?profe) 
 		(curso ?cursoActual)
 	)
-	(test (> ?horasRestantes 0 ))
+	(test (> ?horasRestantes 0))
     (diaActual ?dia)
 	?h<- (horaActual ?horaInicio)
 	(test (< ?horaInicio 14))
@@ -75,11 +75,13 @@
 (defrule avanzarDeViernesALunes
 	?d<-(diaActual VIERNES)
 	?h <-(horaActual 14)
+	?c<-(cursoActual ?cursoActual)
 	=>
 	(retract ?d)
 	(retract ?h)
+	(retract ?c)
 	(assert (diaActual LUNES))
-	(assert (cursoActual 2))
+	(assert (cursoActual (+ 1 ?cursoActual)))
 	(assert (horaActual 8))
 )
 

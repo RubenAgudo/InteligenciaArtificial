@@ -164,7 +164,7 @@
         (nombre IS)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Bego)
+        (profesor Bego2)
         (curso 3)
     )
     
@@ -196,7 +196,7 @@
         (nombre AC)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Jurgi)
+        (profesor Jurgi2)
         (curso 4)
     )
     
