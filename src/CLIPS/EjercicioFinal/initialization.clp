@@ -128,7 +128,136 @@
         (curso 2)
     )
     
+	(asignatura 
+        (nombre AC)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Jurgi)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre BD)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Conchi)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre EAE)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor OScar)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre EDA)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Koldo)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre IS)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Bego)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre MEA)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Eguzkitza)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre LCSI)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Jose)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre IRC)
+        (horasSemanales 2)
+        (horasRestantes 2)
+        (profesor MariLuz)
+        (curso 3)
+    )
+	
+	(asignatura 
+        (nombre AC)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Jurgi)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre BD)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Conchi)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre EAE)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor OScar)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre EDA)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Koldo)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre IS)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Bego)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre MEA)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Eguzkitza)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre LCSI)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Jose)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre IRC)
+        (horasSemanales 2)
+        (horasRestantes 2)
+        (profesor MariLuz)
+        (curso 4)
+    )
+	
     (cursoActual 1)
-    (maxHorasDiaAsignatura 3)
+	(diaActual LUNES)
+	(horaActual 8)
 
 )
