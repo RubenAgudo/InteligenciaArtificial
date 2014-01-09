@@ -1,0 +1,85 @@
+\documentclass{report}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fontspec}
+
+\setmainfont{Helvetica Neue}
+
+% Title Page
+\title{CLIPS Laboratorio 4}
+\author{Rub\'{e}n Agudo \\
+    Jonatan Galean \\
+    I\~{n}igo Ochoa de Erive}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+    Implementaci\'{o}n del trabajo de fin de asignatura, en la que se crea un horario 
+    para todos los cursos de la carrera de Ingenier\'{i}a de Gesti\'{o}n y sistemas de informaci\'{o}n
+\end{abstract}
+
+\chapter{Dise\~{n}o}
+Los mayores problemas que nos hemos encontrado a la hora de dise\~{n}ar el software en s\'{i} han sido:
+\begin{itemize}
+	\item \textbf{Como guardar la informaci\'{o}n}: en hechos, en clases, en templates...
+	\item \textbf{La estrategia de asignaci\'{o}n de las horas}: 
+	Asignar de golpe el m\'{a}ximo de horas posibles, asignar las horas de una en una, asignar en "horizontal"...
+	\item \textbf{Como gestionar los d\'{i}as:} Es decir, que hacer cuando pasamos de 
+	LUNES a MARTES, c\'{o}mo pasar de un d\'{i}a a otro...
+\end{itemize}
+
+\chapter{Implementaci\'{o}n}
+
+\section{Decisiones tomadas}
+
+Al final, para facilitarnos la vida, y no hacer demasiado complejo el programa, hemos tomado las siguientes decisiones:
+\begin{itemize}
+	\item Guardamos todos los datos de las asignaturas y clases en templates
+	\item El resto de variables "globales" las guardamos en hechos simples, tales como el curso en el que 
+	estamos, el d\'{i}a actual, y la siguiente hora que vamos a asignar.
+\end{itemize}
+
+Utilizando templates simplificamos mucho la manera de acceder a los datos para poder crear los siguientes, y
+nos ahorramos la complejidad de tratar con clases.
+
+Por otro lado, cuando tratamos los conflictos, no hacemos ning\'{u}n tipo de \emph{backtracking}. Sabemos que 
+puede llegar a un estado de \emph{deadlock} o bloqueo mutuo en la que no se puede continuar. Pero hemos considerado
+que intentar realizar un desbloqueo, volviendo hacia atr\'{a}s era demasiado complejo y no era el objetivo de esta
+tarea, adem\'{a}s de no garantizar que no haya una soluci\'{o}n
+
+\section{Reglas necesarias}
+Para poder realizar la funcionalidad requerida, hemos programado un total de 6 (seis) reglas. De las cuales solo
+una tiene una funcionalidad por as\'{i} decirlo, principal.
+
+Las reglas creadas son:
+\subsection{Asignar}
+La tarea de esta regla es crear una \emph{clase} tomando como base una \emph{asignatura}.
+
+Para ello, lo que hace es, comprobar que exista una asignatura del curso actual, que las horas restantes semanales
+de la asignatura, sean mayor que cero, y que aun estamos en horario lectivo (entre 8 y 14).
+
+Si se cumplen esas condiciones, lo que se hace es, crear una nueva clase, con duraci\'{o}n de una hora, con el resto de
+atributos iguales que a los de la asignatura. Despu\'{e}s se borra el hecho que especifica en que hora estamos, y
+se crea uno con una hora mas. Por \'{u}ltimo, modifica la asignatura para especificar que tiene una hora restante
+menos para impartir.
+
+\subsection{AvanzarDeDia}
+Realmente no es una regla, sino 5 (cinco). Las cuales se encargan de avanzar de LUNES a MARTES, de MARTES a MIERCOLES
+etc y volver a poner la hora actual a las 8 de la ma\~{n}ana. Para avanzar de d\'{i}a, tenemos que haber rellenado
+completamente el d\'{i}a, es un requisito indispensable, y es por ello que est\'{a} puesto como una constante en
+el c\'{o}digo.
+
+La \'{u}nica especial es la de volver a pasar de VIERNES a LUNES, que realmente es avanzar de curso.
+
+Para avanzar de curso, se requiere (de momento) que todo el curso est\'{e} relleno, \'{u}nicamente pudiendo haber
+d\'{i}as libres en el \'{u}ltimo curso, ya que al no haber nada para asignar el programa terminar\'{i}a.
+
+%\appendix
+%\chapter{Notas}
+%Hemos probado que funciona. Hemos creado distintos tipos de bloqueo para ver que sucede.
+
+\end{document}

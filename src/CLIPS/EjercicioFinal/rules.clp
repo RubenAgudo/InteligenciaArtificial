@@ -85,3 +85,19 @@
 	(assert (horaActual 8))
 )
 
+(defrule forzar-avanzar-de-curso
+	?c<-(cursoActual ?cursoActual)
+	?d<-(diaActual ?)
+	?h <-(horaActual ?)
+	(asignatura 
+		(nombre ?) 
+		(horasSemanales ?) 
+		(horasRestantes 0) 
+		(profesor ?) 
+		(curso ?cursoActual))
+	=>
+	(retract ?c)
+	(assert (diaActual LUNES))
+	(assert (cursoActual (+ 1 ?cursoActual)))
+	(assert (horaActual 8))
+)
