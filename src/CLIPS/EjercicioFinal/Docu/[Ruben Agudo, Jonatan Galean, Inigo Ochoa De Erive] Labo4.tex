@@ -75,11 +75,43 @@ el c\'{o}digo.
 
 La \'{u}nica especial es la de volver a pasar de VIERNES a LUNES, que realmente es avanzar de curso.
 
-Para avanzar de curso, se requiere (de momento) que todo el curso est\'{e} relleno, \'{u}nicamente pudiendo haber
+Para avanzar de curso, se requiere que todo el curso est\'{e} relleno, \'{u}nicamente pudiendo haber
 d\'{i}as libres en el \'{u}ltimo curso, ya que al no haber nada para asignar el programa terminar\'{i}a.
 
-%\appendix
-%\chapter{Notas}
-%Hemos probado que funciona. Hemos creado distintos tipos de bloqueo para ver que sucede.
+\appendix
+\chapter{Notas}
+Hemos probado que funciona. Hemos creado distintos tipos de bloqueo para ver que sucede. Tambi\'{e}n sabemos que se dejan
+muchos casos sin tratar, pero requer\'{i}an de un tiempo que no ten\'{i}amos, y hemos preferido un funcionamiento b\'{a}sico
+pero robusto, a intentar hacer muchas cosas sin saber siquiera si ser\'{i}amos capaces de completar la funcionalidad clave.
 
+\section{ForzarAvanzarDeCurso}
+Esta es una de las reglas que se han quedado en el tintero, la idea es, que si a todas las asignaturas de un curso ya no le quedan clases
+por asignar, forzamos el avance del curso. Este caso puede darse en el que un curso tenga menos horas lectivas que horas tiene una semana, 
+por ejemplo, que el primer curso tenga 2 asignaturas de 4 horas cada una. Por lo que habr\'{i}a que dejar la mitad de la semana libre.
+
+El c\'{o}digo que hab\'{i}amos pensado, pero que finalmente no hemos a\~{n}adido porque no funciona, es el siguiente:
+\begin{lstlisting}[language=LISP, showspaces=false, numbers=left, breaklines=true]
+
+(defrule forzar-avanzar-de-curso
+    ?c<-(cursoActual ?cursoActual)
+    ?d<-(diaActual ?)
+    ?h <-(horaActual ?)
+    $?a<-(asignatura 
+        (nombre ?) 
+        (horasSemanales ?) 
+        (horasRestantes 0) 
+        (profesor ?) 
+        (curso ?cursoActual)
+    )
+    =>
+    (retract ?c)
+    (assert (diaActual LUNES))
+    (assert (cursoActual (+ 1 ?cursoActual)))
+    (assert (horaActual 8))
+)
+    
+\end{lstlisting}
+
+El problema estriba en que cuando una asignatura se quede sin d\'{a}s disponibles, salta de curso aunque haya asignaturas con horas restantes
+mayores que cero, y no sab\'{i}amos como comprobar que todas fueran 0 al mismo tiempo.
 \end{document}
