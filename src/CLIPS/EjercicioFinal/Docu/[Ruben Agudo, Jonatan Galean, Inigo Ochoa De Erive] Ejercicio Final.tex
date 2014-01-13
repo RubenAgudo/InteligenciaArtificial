@@ -7,7 +7,7 @@
 \setmainfont{Helvetica Neue}
 
 % Title Page
-\title{CLIPS Laboratorio 4}
+\title{Ejercicio Final CLIPS}
 \author{Rub\'{e}n Agudo \\
     Jonatan Galean \\
     I\~{n}igo Ochoa de Erive}
@@ -19,7 +19,9 @@
 
 \begin{abstract}
     Implementaci\'{o}n del trabajo de fin de asignatura, en la que se crea un horario 
-    para todos los cursos de la carrera de Ingenier\'{i}a de Gesti\'{o}n y sistemas de informaci\'{o}n
+    para todos los cursos de la carrera de Ingenier\'{i}a de Gesti\'{o}n y sistemas de informaci\'{o}n.
+    Todo el c\'{o}digo esta disponible bajo licencia MIT en: 
+    \url{https://github.com/RubenAgudo/InteligenciaArtificial/tree/master/src/CLIPS/EjercicioFinal}
 \end{abstract}
 
 \chapter{Dise\~{n}o}
@@ -41,6 +43,8 @@ Al final, para facilitarnos la vida, y no hacer demasiado complejo el programa, 
 	\item Guardamos todos los datos de las asignaturas y clases en templates
 	\item El resto de variables "globales" las guardamos en hechos simples, tales como el curso en el que 
 	estamos, el d\'{i}a actual, y la siguiente hora que vamos a asignar.
+    \item Es fundamental que la estrategia de ejecuci\'{o}n de reglas sea en anchura. Ya que es la manera mas efectiva
+    de evitar que un d\'{i}a haya mas de 3 horas seguidas de la misma asignatura. De hecho es imposible que se de esa situaci\'{o}n.
 \end{itemize}
 
 Utilizando templates simplificamos mucho la manera de acceder a los datos para poder crear los siguientes, y
