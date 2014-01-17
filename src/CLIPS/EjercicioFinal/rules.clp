@@ -32,72 +32,37 @@
     
 )
 
-(defrule avanzarDeLunesAMartes
-	?d<-(diaActual LUNES)
-	?h <-(horaActual 14)
-	=>
-	(retract ?d)
-	(retract ?h)
-	(assert (diaActual MARTES))
-	(assert (horaActual 8))
+(deffunction avanzardia (?dia)
+	(bind ?var ?dia)
+	(switch ?var
+	(case LUNES then (bind ?var MARTES))
+	(case MARTES then (bind ?var MIERCOLES))
+	(case MIERCOLES then (bind ?var JUEVES))
+	(case JUEVES then (bind ?var VIERNES))
+	(case VIERNES then (bind ?var LUNES)))
 )
 
-(defrule avanzarDeMartesAMiercoles
-	?d<-(diaActual MARTES)
-	?h <-(horaActual 14)
-	=>
-	(retract ?d)
-	(retract ?h)
-	(assert (diaActual MIERCOLES))
-	(assert (horaActual 8))
+(deffunction avanzarannio (?dia)
+	(bind ?var ?dia)
+	(switch ?var
+	(case LUNES then (bind ?var 0))
+	(case MARTES then (bind ?var 0))
+	(case MIERCOLES then (bind ?var 0))
+	(case JUEVES then (bind ?var 0))
+	(case VIERNES then (bind ?var 1)))
 )
 
-(defrule avanzarDeMiercolesAJueves
-	?d<-(diaActual MIERCOLES)
-	?h <-(horaActual 14)
-	=>
-	(retract ?d)
-	(retract ?h)
-	(assert (diaActual JUEVES))
-	(assert (horaActual 8))
-)
 
-(defrule avanzarDeJuevesAViernes
-	?d<-(diaActual JUEVES)
-	?h <-(horaActual 14)
-	=>
-	(retract ?d)
-	(retract ?h)
-	(assert (diaActual VIERNES))
-	(assert (horaActual 8))
-)
-
-(defrule avanzarDeViernesALunes
-	?d<-(diaActual VIERNES)
+(defrule avanzar
+	?d<-(diaActual ?dia)
 	?h <-(horaActual 14)
 	?c<-(cursoActual ?cursoActual)
 	=>
 	(retract ?d)
 	(retract ?h)
 	(retract ?c)
-	(assert (diaActual LUNES))
-	(assert (cursoActual (+ 1 ?cursoActual)))
+	(assert (cursoActual (+ ?cursoActual (avanzarannio ?dia))))
+	(assert (diaActual (avanzardia ?dia)))
 	(assert (horaActual 8))
 )
 
-(defrule forzar-avanzar-de-curso
-	?c<-(cursoActual ?cursoActual)
-	?d<-(diaActual ?)
-	?h <-(horaActual ?)
-	(asignatura 
-		(nombre ?) 
-		(horasSemanales ?) 
-		(horasRestantes 0) 
-		(profesor ?) 
-		(curso ?cursoActual))
-	=>
-	(retract ?c)
-	(assert (diaActual LUNES))
-	(assert (cursoActual (+ 1 ?cursoActual)))
-	(assert (horaActual 8))
-)
