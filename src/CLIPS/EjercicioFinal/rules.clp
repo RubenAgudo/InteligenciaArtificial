@@ -1,14 +1,57 @@
 (defrule asignar
-    (cursoActual ?cursoActual)
-    ?as<-(asignatura 
+	(define salience 20)
+	(cursoActual ?cursoActual)
+	?as<-(asignatura 
 		(nombre ?nombre) 
 		(horasSemanales ?horasSemanales) 
 		(horasRestantes ?horasRestantes) 
 		(profesor ?profe) 
 		(curso ?cursoActual)
 	)
+	
 	(test (> ?horasRestantes 0))
-    (diaActual ?dia)
+	(diaActual ?dia)
+	?h<- (horaActual ?horaInicio)
+	(test (< ?horaInicio 14))
+	
+	(not (exists (clase (curso ?) (nombre ?) (diaSemana ?dia) (profe ?profe) (horaInicio ?horaInicio) (horaFin ?))))
+	
+	hed <- (horasEnDia (asignatura ?as) (dia ?dia) (horas ?horas))
+	
+	(test (< ?horas 4))
+	
+	=>
+	
+	(assert 
+		(clase
+			(curso ?cursoActual)
+			(nombre ?nombre)
+			(diaSemana ?dia)
+			(profe ?profe)
+			(horaInicio ?horaInicio)
+			(horaFin (+ ?horaInicio 1))
+		)
+	)
+	(retract ?h)
+	(assert (horaActual (+ ?horaInicio 1)))
+	(modify ?as (horasRestantes (- ?horasRestantes 1)))
+	(modify ?hed (horas (+ 1 ?horas)))
+	
+)
+
+(defrule asignar
+	(define salience 10)
+	(cursoActual ?cursoActual)
+	?as<-(asignatura 
+		(nombre ?nombre) 
+		(horasSemanales ?horasSemanales) 
+		(horasRestantes ?horasRestantes) 
+		(profesor ?profe) 
+		(curso ?cursoActual)
+	)
+	
+	(test (> ?horasRestantes 0))
+	(diaActual ?dia)
 	?h<- (horaActual ?horaInicio)
 	(test (< ?horaInicio 14))
 	
@@ -16,20 +59,21 @@
 	
 	=>
 	
-    (assert 
-        (clase
-            (curso ?cursoActual)
-            (nombre ?nombre)
-            (diaSemana ?dia)
-            (profe ?profe)
-            (horaInicio ?horaInicio)
-            (horaFin (+ ?horaInicio 1))
-        )
-    )
+	(assert 
+		(clase
+			(curso ?cursoActual)
+			(nombre ?nombre)
+			(diaSemana ?dia)
+			(profe ?profe)
+			(horaInicio ?horaInicio)
+			(horaFin (+ ?horaInicio 1))
+		)
+	)
 	(retract ?h)
 	(assert (horaActual (+ ?horaInicio 1)))
 	(modify ?as (horasRestantes (- ?horasRestantes 1)))
-    
+	(assert (horasEnDia (asignatura ?as) (dia ?dia) (horas 1)))
+	
 )
 
 (deffunction avanzardia (?dia)

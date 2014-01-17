@@ -52,3 +52,17 @@
         (range 1 4)
     )
 )
+
+(deftemplate horasEnDia
+	(slot asignatura
+		(type SYMBOL)
+	)
+	
+	(slot dia
+		(type SYMBOL)
+	)
+	
+	(slot horas
+		(type INTEGER)
+	)
+)
