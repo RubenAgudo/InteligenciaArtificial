@@ -1,5 +1,5 @@
-(defrule asignar
-	(define salience 20)
+(defrule asignarGeneral
+	(declare (salience 20))
 	(cursoActual ?cursoActual)
 	?as<-(asignatura 
 		(nombre ?nombre) 
@@ -16,9 +16,9 @@
 	
 	(not (exists (clase (curso ?) (nombre ?) (diaSemana ?dia) (profe ?profe) (horaInicio ?horaInicio) (horaFin ?))))
 	
-	hed <- (horasEnDia (asignatura ?as) (dia ?dia) (horas ?horas))
+	?hed <- (horasEnDia (asignatura ?nombre) (dia ?dia) (horas ?horas) (curso ?cursoActual))
 	
-	(test (< ?horas 4))
+	(test (< ?horas 3))
 	
 	=>
 	
@@ -40,7 +40,7 @@
 )
 
 (defrule asignar
-	(define salience 10)
+	(declare (salience 10))
 	(cursoActual ?cursoActual)
 	?as<-(asignatura 
 		(nombre ?nombre) 
@@ -56,7 +56,7 @@
 	(test (< ?horaInicio 14))
 	
 	(not (exists (clase (curso ?) (nombre ?) (diaSemana ?dia) (profe ?profe) (horaInicio ?horaInicio) (horaFin ?))))
-	
+	(not (exists (horasEnDia (asignatura ?nombre) (dia ?dia) (horas ?) (curso ?cursoActual))))
 	=>
 	
 	(assert 
@@ -72,7 +72,7 @@
 	(retract ?h)
 	(assert (horaActual (+ ?horaInicio 1)))
 	(modify ?as (horasRestantes (- ?horasRestantes 1)))
-	(assert (horasEnDia (asignatura ?as) (dia ?dia) (horas 1)))
+	(assert (horasEnDia (asignatura ?nombre) (dia ?dia) (horas 1) (curso ?cursoActual)))
 	
 )
 

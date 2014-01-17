@@ -129,23 +129,15 @@
     )
     
 	(asignatura 
-        (nombre AC)
+        (nombre ADSI)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Jurgi)
+        (profesor Mikel)
         (curso 3)
     )
     
     (asignatura 
-        (nombre BD)
-        (horasSemanales 4)
-        (horasRestantes 4)
-        (profesor Conchi)
-        (curso 3)
-    )
-    
-    (asignatura 
-        (nombre EAE)
+        (nombre SGI)
         (horasSemanales 4)
         (horasRestantes 4)
         (profesor OScar)
@@ -153,79 +145,63 @@
     )
     
     (asignatura 
-        (nombre EDA)
+        (nombre SGSI)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Koldo)
+        (profesor Mikel)
         (curso 3)
     )
     
     (asignatura 
-        (nombre IS)
+        (nombre ABD)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Bego2)
+        (profesor Anaje)
         (curso 3)
     )
     
     (asignatura 
-        (nombre MEA)
+        (nombre SAD)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Eguzkitza)
+        (profesor Alicia)
         (curso 3)
     )
     
     (asignatura 
-        (nombre LCSI)
+        (nombre SW)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Jose)
+        (profesor MariLuz)
         (curso 3)
     )
     
     (asignatura 
-        (nombre IRC)
+        (nombre GP)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Hector)
+        (curso 3)
+    )
+    
+    (asignatura 
+        (nombre SGE)
         (horasSemanales 2)
         (horasRestantes 2)
-        (profesor MariLuz)
+        (profesor Amaya)
         (curso 3)
     )
 	
 	(asignatura 
-        (nombre AC)
+        (nombre DAS)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Jurgi2)
+        (profesor Mikel)
         (curso 4)
     )
     
     (asignatura 
-        (nombre BD)
-        (horasSemanales 4)
-        (horasRestantes 4)
-        (profesor Conchi)
-        (curso 4)
-    )
-    
-    (asignatura 
-        (nombre EAE)
-        (horasSemanales 4)
-        (horasRestantes 4)
-        (profesor OScar)
-        (curso 4)
-    )
-    
-    (asignatura 
-        (nombre EDA)
-        (horasSemanales 4)
-        (horasRestantes 4)
-        (profesor Koldo)
-        (curso 4)
-    )
-    
-    (asignatura 
-        (nombre IS)
+        (nombre IA)
         (horasSemanales 4)
         (horasRestantes 4)
         (profesor Bego)
@@ -233,26 +209,50 @@
     )
     
     (asignatura 
-        (nombre MEA)
+        (nombre DAWE)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Eguzkitza)
+        (profesor Juanan)
         (curso 4)
     )
     
     (asignatura 
-        (nombre LCSI)
+        (nombre MD)
         (horasSemanales 4)
         (horasRestantes 4)
-        (profesor Jose)
+        (profesor Alicia)
         (curso 4)
     )
     
     (asignatura 
-        (nombre IRC)
+        (nombre EUS)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Profe1)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre Ingles)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Profe2)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre IPC)
+        (horasSemanales 4)
+        (horasRestantes 4)
+        (profesor Amaya)
+        (curso 4)
+    )
+    
+    (asignatura 
+        (nombre APS)
         (horasSemanales 2)
         (horasRestantes 2)
-        (profesor MariLuz)
+        (profesor Anaje)
         (curso 4)
     )
 	

@@ -54,9 +54,7 @@
 )
 
 (deftemplate horasEnDia
-	(slot asignatura
-		(type SYMBOL)
-	)
+	(slot asignatura)
 	
 	(slot dia
 		(type SYMBOL)
@@ -65,4 +63,8 @@
 	(slot horas
 		(type INTEGER)
 	)
+    
+    (slot curso
+        (type INTEGER)
+    )
 )
